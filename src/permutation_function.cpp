@@ -1,3 +1,6 @@
+#ifndef PERMUTATION_FUNCTION
+#define PERMUTATION_FUNCTION
+
 #include "permutation.hpp"
 void permutation_function::print_G( int n , std::vector< std::set< permutation > > &G ){
  for( int i = 0 ; i < n ; i++ ){
@@ -51,3 +54,4 @@ void permutation_function::changebase( int n , permutation &beta, permutation &b
  G = H;
 }
 
+#endif

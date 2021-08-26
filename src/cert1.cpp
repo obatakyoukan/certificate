@@ -1,5 +1,7 @@
-#include "graph.hpp"
+#ifndef CERT1_CPP
+#define CERT1_CPP
 
+#include "graph.hpp"
 void graph::Canon1( std::map<int , std::set< int > > &P , std::vector<int> &mu , bool &BestExist ){
  std::map< int , std::set<int> > Q = REFINE( P );
  //basic_function::print_partition( Q );
@@ -99,4 +101,5 @@ std::string graph::Cert3() {
   }
  return s;
 }
+#endif
 

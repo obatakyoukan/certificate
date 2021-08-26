@@ -1,3 +1,5 @@
+#ifndef PERMUTATION_CPP
+#define PERMUTATION_CPP
 #include "permutation.hpp"
 
 permutation permutation::mult(permutation& b) {
@@ -102,4 +104,4 @@ std::vector< int > permutation_function::stringtoarray( std::string C ){
  }
  return res;
 }
-
+#endif

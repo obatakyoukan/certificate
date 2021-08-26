@@ -1,3 +1,6 @@
+#ifndef CERT2_CPP
+#define CERT2_CPP
+
 #include "graph.hpp"
 
 void graph::Canon2( permutation &beta, std::vector< std::set<permutation> > &G , std::map<int , std::set< int > > &P , std::vector<int> &mu , bool &BestExist ){
@@ -138,4 +141,4 @@ std::string graph::Cert4() {
  return s;
 }
 
-
+#endif
