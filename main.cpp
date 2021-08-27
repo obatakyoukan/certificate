@@ -1,6 +1,9 @@
 #include "permutation.hpp"
 #include "graph.hpp"
+#include "cert1.hpp"
+#include "cert2.hpp"
 #include <time.h>
+#include <string>
 
 int main() {
  int n,m;
@@ -11,7 +14,7 @@ int main() {
  for( int i = 0 ; i < m ; i++ ){
   int u,v;
   std::cin>>o>>u>>v;
-  u--,v--;
+  //u--,v--;
   E[u][v] = E[v][u] = true;
  }
  graph g( E );
@@ -32,10 +35,5 @@ int main() {
  end= clock();
  time = static_cast<double> (end-start) / CLOCKS_PER_SEC * 1.0;
  std::cout << "time = " << time << " [sec]" << std::endl;
-
-
-
-
-
 
 }

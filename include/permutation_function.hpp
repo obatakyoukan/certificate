@@ -1,45 +1,15 @@
-#ifndef PERMUTATION_CPP
-#define PERMUTATION_CPP
-#include "permutation.hpp"
+#ifndef PERMUTATION_FUNCTION_HPP
+#define PERMUTATION_FUNCTION_HPP
 
-permutation permutation::mult(permutation& b) {
- assert( n == b.n );
- std::vector<int> c( n );
- for( int i = 0 ; i < n ; i++ ){
-  c[i] = p[ b.p[i] ];
- }
- return permutation( c );
-}
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <numeric>
 
-permutation permutation::inv() {
- std::vector<int> c( n );
- for( int i = 0 ; i < n ; i++ ){
-  c[ p[i] ] = i;
- }
- return permutation( c );
-}
 
-std::string permutation::arraytostring() {
- std::vector<bool> P(n,true);
- std::string C = "";
- for( int i = 0 ; i < n ; i++ ){
-  if( P[i] ){
-   //if( i != 0 ) C += " ";
-   C += "(";
-   C += std::to_string( i );
-   P[i] =  false;
-   int j = i;
-   while( P[ p[j] ] ){
-    C += ",";
-    j = p[j];
-    C += std::to_string( j );
-    P[j] = false;
-   }
-   C += ")";
-  }
- }
- return C;
-}
+namespace permutation_function {
+ std::vector< int > stringtoarray( std::string C );
+};
 
 std::vector< int > permutation_function::stringtoarray( std::string C ){
  int n = 0;

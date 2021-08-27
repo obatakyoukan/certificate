@@ -1,7 +1,8 @@
-#ifndef REFINE_CPP
-#define REFINE_CPP
-
+#ifndef REFINE_HPP
+#define REFINE_HPP
 #include "graph.hpp"
+#include "graph_lib.hpp"
+#include "basic_function.hpp"
 
 std::map< int, std::set<int> > graph::REFINE( std::map< int , std::set<int> > &A ){
  std::map< int , std::set<int> > B = A;
@@ -68,7 +69,5 @@ int graph::AbsAndSet( int u, std::set< int > &T ){
   }
  return res;
 }
-
-
 
 #endif

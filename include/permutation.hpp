@@ -2,55 +2,88 @@
 #define PERMUTATION_HPP
 
 #include <iostream>
-
 #include <vector>
 #include <cassert>
 #include <string>
-#include <set>
-#include <algorithm>
-#include <numeric>
-
+#include "permutation_function.hpp"
 
 class permutation {
  public:
+ //private:
   int n;
   std::vector<int> p;
  public:
-  permutation(){}
-  permutation(int n ): n(n),p(n){ iota(p.begin(),p.end(),0); }
-  permutation(std::vector<int>& p) : n(p.size()),p(p){}
-  bool operator < ( const permutation& b ) const {
-   assert( n != b.n );
-   for( int i = 0 ; i < n ; i++ )
-    if( p[i] != b.p[i] ) return p[i] < b.p[i];
-   return p[0] < b.p[0];//同じとき
-  }
-  bool operator == ( const permutation& b ) const {
-   assert( n != b.n );
-   for( int i = 0 ; i < n ; i++ )
-    if( p[i] != b.p[i] ) return false;
-   return true;
-  }
-  bool operator != ( const permutation& b ) const {
-   assert( n != b.n );
-   for( int i = 0 ; i < n ; i++ )
-    if( p[i] != b.p[i] ) return true;
-   return false;
+  permutation() {}
+  permutation(int n ) : n( n ),p(n) {}
+  permutation( std::vector<int> p ) : n( p.size() ), p ( p ) {}
+  permutation( std::string str ){
+   p = permutation_function::stringtoarray( str );
+   n = p.size();
+   //str = arraytostring();
   }
 
   permutation mult( permutation& b );
   permutation inv();
   std::string arraytostring();
+
+  bool operator < ( const permutation& b ) const {
+   assert( n == b.n );
+   for( int i = 0 ; i < n ; i++ )
+    if( p[i] != b.p[i] ) return p[i] < b.p[i];
+   return n < b.n;
+  }
+  bool operator == ( const permutation& b ) const {
+   assert( n == b.n );
+   for( int i = 0 ; i < n ; i++ )
+    if( p[i] != b.p[i] ) return false;
+   return true;
+  }
+  bool operator != ( const permutation& b ) const {
+   assert( n == b.n );
+   for( int i = 0 ; i < n ; i++ )
+    if( p[i] != b.p[i] ) return true;
+   return false;
+  }
 };
 
+permutation permutation::mult(permutation& b) {
+ assert( n == b.n );
+ std::vector<int> c( n );
+ for( int i = 0 ; i < n ; i++ ){
+  c[i] = p[ b.p[i] ];
+ }
+ return permutation( c );
+}
 
-namespace permutation_function {
- std::vector< int > stringtoarray( std::string C );
- void print_G( int n , std::vector< std::set< permutation > > &G );
- void enter2( int n , permutation &g, permutation &beta, std::vector< std::set< permutation > > &G);
- int test2( int n , permutation &g, permutation &beta,  std::vector< std::set< permutation > > &G );
- void changebase( int n , permutation &beta, permutation &beta_dash , std::vector< std::set< permutation > > &G );
-};
+permutation permutation::inv() {
+ std::vector<int> c( n );
+ for( int i = 0 ; i < n ; i++ ){
+  c[ p[i] ] = i;
+ }
+ return permutation( c );
+}
+
+std::string permutation::arraytostring() {
+ std::vector<bool> P(n,true);
+ std::string C = "";
+ for( int i = 0 ; i < n ; i++ ){
+  if( P[i] ){
+   //if( i != 0 ) C += " ";
+   C += "(";
+   C += std::to_string( i );
+   P[i] =  false;
+   int j = i;
+   while( P[ p[j] ] ){
+    C += ",";
+    j = p[j];
+    C += std::to_string( j );
+    P[j] = false;
+   }
+   C += ")";
+  }
+ }
+ return C;
+}
+
 
 #endif
-

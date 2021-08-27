@@ -10,7 +10,6 @@
 #include "CompResult.hpp"
 #include "Vector.hpp"
 #include "permutation.hpp"
-#include "basic_function.hpp"
 
 class graph {
  private:
@@ -27,6 +26,7 @@ class graph {
   bool is_edge( int x, int y );
   void make_deg();
   int getdeg(int i );
+
 
   //Algorithm 7.1
   std::map< std::tuple<int, Vector> , std::vector<int> > getPartitions();
@@ -51,10 +51,17 @@ class graph {
   std::string Cert3();
   std::string Cert4();
 
+
+  std::vector<int> Cert1v();
+  std::vector<int> Cert2v();
+  std::vector<int> Cert3v();
+  std::vector<int> Cert4v();
+
   void print();
   void print_V();
   void print_V_alphabet();
   void print_G();
+
 };
 
 graph::graph( int n ): n(n) {

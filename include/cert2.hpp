@@ -1,7 +1,14 @@
-#ifndef CERT2_CPP
-#define CERT2_CPP
-
+#ifndef CERT2_HPP
+#define CERT2_HPP
 #include "graph.hpp"
+#include "graph_lib.hpp"
+#include "graph_print.hpp"
+#include "refine.hpp"
+#include "basic_function.hpp"
+#include "CompResult.hpp"
+#include "permutation.hpp"
+#include "permutation_library.hpp"
+
 
 void graph::Canon2( permutation &beta, std::vector< std::set<permutation> > &G , std::map<int , std::set< int > > &P , std::vector<int> &mu , bool &BestExist ){
  std::map< int , std::set<int> > Q = REFINE( P );
@@ -90,12 +97,15 @@ std::string graph::Cert2() {
  for( int i = 0 ; i < n ; i++ ) G[i].insert( I );
  Canon2( I , G , P , mu , BestExist );
 
+ unsigned long long int num = 0;
  std::string s = "";
  for(int i = 1 ; i < n ; i++ )
   for(int j = 0 ; j < i ; j++ )
   {
+   num <<= 1;
    if( is_edge( mu[i] , mu[j] ) ){
     s += "1";
+    num++;
    }else{
     s += "0";
    }
@@ -128,17 +138,59 @@ std::string graph::Cert4() {
  std::vector< std::set< permutation > > G(n);
  for( int i = 0 ; i < n ; i++ ) G[i].insert( I );
  Canon2( I , G , P , mu , BestExist );
+ //unsigned long long int num = 0;
  std::string s = "";
  for(int i = 1 ; i < n ; i++ )
   for(int j = 0 ; j < i ; j++ )
   {
+   //num <<= 1;
    if( is_edge( mu[i] , mu[j] ) ){
     s += "1";
+    //num++;
    }else{
     s += "0";
    }
   }
  return s;
 }
+
+std::vector<int> graph::Cert2v() {
+ std::map<int , std::set<int> > P;
+ std::vector<int> mu( n );
+ iota( mu.begin() , mu.end() , 0 );
+ for(int i = 0 ; i < n ; i++ ) {
+  P[0].insert( i );
+ }
+ bool BestExist = false;
+ std::vector< int > Ip(n);
+ iota( Ip.begin() , Ip.end() , 0 );
+ permutation I( Ip );
+ std::vector< std::set< permutation > > G(n);
+ for( int i = 0 ; i < n ; i++ ) G[i].insert( I );
+ Canon2( I , G , P , mu , BestExist );
+ return mu;
+}
+
+std::vector<int> graph::Cert4v() {
+ std::map<int , std::set<int> > P;
+ std::vector<int> mu( n );
+ iota( mu.begin() , mu.end() , 0 );
+ std::map< std::tuple<int,Vector> , std::vector<int> > X = getPartitions();
+ int index = 0;
+ for( auto it : X ) {
+  for( auto v : it.second ) P[ index ].insert( v );
+  index++;
+ }
+ bool BestExist = false;
+ std::vector< int > Ip(n);
+ iota( Ip.begin() , Ip.end() , 0 );
+ permutation I( Ip );
+ std::vector< std::set< permutation > > G(n);
+ for( int i = 0 ; i < n ; i++ ) G[i].insert( I );
+ Canon2( I , G , P , mu , BestExist );
+ return mu;
+}
+
+
 
 #endif

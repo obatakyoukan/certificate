@@ -1,5 +1,6 @@
-#ifndef GRAPH_LIB_CPP
-#define GRAPH_LIB_CPP
+#ifndef GRAPH_LIB_HPP
+#define GRAPH_LIB_HPP
+
 #include "graph.hpp"
 
 std::map< std::tuple<int,Vector> , std::vector<int> > graph::getPartitions() {
@@ -27,6 +28,5 @@ CompResult graph::Compare( std::vector< int > &mu , std::vector< int > &pi, int 
  }
  return CompResult::Equal;
 }
-
 
 #endif
