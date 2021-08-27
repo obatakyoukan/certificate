@@ -13,7 +13,6 @@ namespace basic_function {
  void SetDelete( std::set< int > &A, std::set< int > &B ) {
   for( auto v : B ) A.erase( v );
  }
- 
  void SetPrint( std::set< int > &A ){
   std::cout<<"{ ";
   for( auto it = A.begin() ; it != A.end() ; it++ ){
@@ -21,7 +20,6 @@ namespace basic_function {
   }
   std::cout<<"}"<<std::endl;
  }
-
  void print_partition( std::map<int , std::set<int> > &A ){
   std::cout<<"[";
   for( auto i : A ){
@@ -31,7 +29,6 @@ namespace basic_function {
   }
   std::cout<<"]"<<std::endl;
  }
-
 };
 
 #endif
