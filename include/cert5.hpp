@@ -11,7 +11,7 @@
 
 #include "tree.hpp"
 
-void graph::Canon5( permutation &beta, std::vector< std::set<permutation> > &G , std::map<int , std::set< int > > &P , std::vector<int> &mu , bool &BestExist ){
+void graph::Canon5( permutation &beta, std::vector< std::set<permutation> > &G , std::map<int , std::set< int > > &P , std::vector<int> &mu , bool &BestExist , Node *node ){
  std::map< int , std::set<int> > Q = REFINE( P );
  //basic_function::print_partition( Q );
  int l = -1;
@@ -61,7 +61,8 @@ void graph::Canon5( permutation &beta, std::vector< std::set<permutation> > &G ,
    Rl1.erase( u );
    R[l] = Rl;
    R[l+1] = Rl1;
-   Canon5( beta , G , R , mu , BestExist );
+   Node* child ; //まだ、内容は未定義
+   Canon5( beta , G , R , mu , BestExist , child );
    std::vector< int > beta_dashtmp( n );
    std::vector< bool > no_use( n , true );
    for( int j = 0 ; j <= l ; j++ ) {
@@ -106,7 +107,7 @@ std::string graph::Cert5() {
  permutation I( Ip );
  std::vector< std::set< permutation > > G(n);
  for( int i = 0 ; i < n ; i++ ) G[i].insert( I );
- Canon5( I , G , P , mu , BestExist );
+ Canon5( I , G , P , mu , BestExist , root );
  //unsigned long long int num = 0;
  std::string s = "";
  for(int i = 1 ; i < n ; i++ )

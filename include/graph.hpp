@@ -55,6 +55,10 @@ class graph {
   std::string Cert2();
   std::string Cert3();
   std::string Cert4();
+  
+  void Canon5( permutation &beta, std::vector< std::set< permutation > > &G, std::map< int , std::set<int> > &P, std::vector<int> &mu , bool &BestExist , Node* node );
+  std::string Cert5();
+
 
   void print();
   void print_V();
