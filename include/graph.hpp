@@ -11,12 +11,17 @@
 #include "Vector.hpp"
 #include "permutation.hpp"
 
+#include "tree.hpp"
+
 class graph {
  private:
   int n;
   std::vector< std::vector< bool > > g;
   std::vector< int > deg;
  public:
+  //木の根
+  Node* root;
+
   std::vector< int > V;
   graph() {}
   graph( int n );
