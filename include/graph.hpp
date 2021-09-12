@@ -20,7 +20,7 @@ class graph {
   std::vector< int > deg;
  public:
   //木の根
-  Node* root;
+  Node root;
 
   std::vector< int > V;
   graph() {}
@@ -56,7 +56,7 @@ class graph {
   std::string Cert3();
   std::string Cert4();
   
-  void Canon5( permutation &beta, std::vector< std::set< permutation > > &G, std::map< int , std::set<int> > &P, std::vector<int> &mu , bool &BestExist , Node* node );
+  void Canon5( permutation &beta, std::vector< std::set< permutation > > &G, std::map< int , std::set<int> > &P, std::vector<int> &mu , bool &BestExist , Node* node , std::map<int, std::set<int> > &PreQ );
   std::string Cert5();
 
 

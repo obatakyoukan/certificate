@@ -30,4 +30,8 @@ int main() {
  time = static_cast<double> (end-start) / CLOCKS_PER_SEC * 1.0;
  std::cout << "time = " << time << " [sec]" << std::endl;
  
+ std::cout << "Tree"<< std::endl;
+ g.root.print(1);
+ std::cout << "Union Print" << std::endl;
+ union_print_root( n , &g.root );
 }

@@ -11,9 +11,33 @@
 
 #include "tree.hpp"
 
-void graph::Canon5( permutation &beta, std::vector< std::set<permutation> > &G , std::map<int , std::set< int > > &P , std::vector<int> &mu , bool &BestExist , Node *node ){
+void graph::Canon5( permutation &beta, std::vector< std::set<permutation> > &G , std::map<int , std::set< int > > &P , std::vector<int> &mu , bool &BestExist , Node *node , std::map< int , std::set<int> > &PreQ ){
+ //basic_function::print_partition( P );
+
  std::map< int , std::set<int> > Q = REFINE( P );
- //basic_function::print_partition( Q );
+ //node->P = Q; // 単一の分割の要素は，含まない．
+ 
+ std::set<int> preUnique;
+ for( auto i : PreQ ){
+  if( i.second.size() == 1 )
+   preUnique.insert( *i.second.begin() );
+ }
+
+ int index = 0 ;
+ int Pindex = 0;
+ for( auto i : Q ){
+  if( i.second.size() == 1 ){
+   if( preUnique.find( *i.second.begin() ) != preUnique.end() )
+    continue;
+   node->discrete.push_back( std::tie( index , *i.second.begin() ) );
+   index ++;
+  }else{
+   index += i.second.size();
+   node->P[Pindex++] = i.second;
+  }
+ }
+
+ basic_function::print_partition( Q );
  int l = -1;
  for(auto i : Q )
   if( i.second.size() > 1 ){
@@ -30,6 +54,8 @@ void graph::Canon5( permutation &beta, std::vector< std::set<permutation> > &G ,
  	for(int i=0;i<l;i++) pi[i] = *Q[i].begin();
 	Res = Compare( mu , pi , l ); 
  }
+
+ //std::vector< Node* >& children = node->children;
 
  if( l == n ){
   if( !BestExist ){
@@ -61,8 +87,11 @@ void graph::Canon5( permutation &beta, std::vector< std::set<permutation> > &G ,
    Rl1.erase( u );
    R[l] = Rl;
    R[l+1] = Rl1;
-   Node* child ; //まだ、内容は未定義
-   Canon5( beta , G , R , mu , BestExist , child );
+   
+   Node child;
+   //Node* child = (Node*) malloc( sizeof( Node ) ) ; //まだ、内容は未定義
+   node->children.push_back( child );
+   Canon5( beta , G , R , mu , BestExist , &node->children[ node->children.size() - 1 ] , Q );
    std::vector< int > beta_dashtmp( n );
    std::vector< bool > no_use( n , true );
    for( int j = 0 ; j <= l ; j++ ) {
@@ -87,6 +116,10 @@ std::string graph::Cert5() {
  std::map<int , std::set<int> > P;
  std::vector<int> mu( n );
  iota( mu.begin() , mu.end() , 0 );
+
+ for( int i = 0 ; i < n ; i++ )
+  P[0].insert( i );
+ /*
  std::map< std::tuple<int,Vector> , std::vector<int> > X = getPartitions();
  int index = 0;
 
@@ -100,14 +133,17 @@ std::string graph::Cert5() {
   std::cerr <<" }";
  }
  std::cerr << std::endl;
- 
+*/
+ //root = (Node*) malloc( sizeof( Node ) );
+
  bool BestExist = false;
  std::vector< int > Ip(n);
  iota( Ip.begin() , Ip.end() , 0 );
  permutation I( Ip );
  std::vector< std::set< permutation > > G(n);
  for( int i = 0 ; i < n ; i++ ) G[i].insert( I );
- Canon5( I , G , P , mu , BestExist , root );
+ std::map<int, std::set<int> > PreQ = P ;
+ Canon5( I , G , P , mu , BestExist , &root , PreQ );
  //unsigned long long int num = 0;
  std::string s = "";
  for(int i = 1 ; i < n ; i++ )
