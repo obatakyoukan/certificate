@@ -70,7 +70,10 @@ void graph::Canon5( permutation &beta, std::vector< std::set<permutation> > &G ,
    permutation pi2( pi2tmp );
    permutation_function::enter2( n , pi2  , beta , G );
   }
- }else if( Res != CompResult::Worse ){
+ }
+ //else if( 1 )
+ else if( Res != CompResult::Worse )
+ {
   std::set<int> C = Q[l];
   std::set<int> D = Q[l];
   std::map<int,std::set<int> > R;

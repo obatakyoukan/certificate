@@ -27,13 +27,16 @@ struct Node {
 
  void print(int depth){
   std::cout << "depth : " << depth << std::endl;
+  /*
   std::cout << "discrete : ";
   for( auto i : discrete ){
    int a,b;
    std::tie(a,b) = i;
    std::cout << "(" << a << "," << b << ")" ;
   }
-  std::cout << std::endl << "P : ";
+  std::cout << std::endl; 
+  */
+  std::cout << "P : ";
   basic_function::print_partition( P );
   for( int i = 0 ; i < children.size() ; i++ ){
    children[i].print( depth + 1 );
