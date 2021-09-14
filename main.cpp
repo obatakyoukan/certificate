@@ -34,4 +34,22 @@ int main() {
  g.root.print(1);
  std::cout << "Union Print" << std::endl;
  union_print_root( n , &g.root );
+
+ int u = 0 , v = 5;
+ E[u][v] = E[v][u] = true;
+ graph g2( E );
+ start = clock();
+ std::cout<<"G2 Cert5"<<std::endl;
+ std::cout<<g2.Cert5()<<std::endl;
+ end= clock();
+ time = static_cast<double> (end-start) / CLOCKS_PER_SEC * 1.0;
+ std::cout << "time = " << time << " [sec]" << std::endl;
+ 
+ std::cout << "Tree"<< std::endl;
+ g2.root.print(1);
+ std::cout << "Union Print" << std::endl;
+ union_print_root( n , &g2.root );
+
+
+
 }
