@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <tuple>
+#include <map>
 #include "basic_function.hpp"
 
 struct Node {
@@ -81,4 +82,18 @@ void union_print_root( int n , Node *root ){
  (*root).union_print( 1  , Vs );
 }
 
+void tree_map_expand( Node *node , std::map< std::string , Node > &tree_map ){
+ std::string str = basic_function::string_partition( node->P );
+ if( tree_map.find( str ) != tree_map.end() )
+  return;
+ tree_map [ str ] = *node;
+ for( Node& child : node->children )
+  tree_map_expand( &child , tree_map );
+}
+
+std::map< std::string , Node > make_tree_map( Node *root ){
+ std::map< std::string , Node > res;
+ tree_map_expand( root , res ); 
+ return res;
+}
 #endif

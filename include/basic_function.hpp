@@ -20,6 +20,7 @@ namespace basic_function {
   }
   std::cout<<"}"<<std::endl;
  }
+ 
  void print_partition( std::map<int , std::set<int> > &A ){
   std::cout<<"[";
   for( auto i : A ){
@@ -29,6 +30,19 @@ namespace basic_function {
   }
   std::cout<<"]"<<std::endl;
  }
+
+ std::string string_partition( std::map<int, std::set<int> > &A) {
+  std::string res = "[";
+  for( auto i : A ){
+   res += "{";
+   for( auto j : i.second )
+    res += std::to_string(j) + ",";
+   res += "}";
+  }
+  res += "]";
+  return res;
+ }
+
 };
 
 #endif

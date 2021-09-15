@@ -35,6 +35,12 @@ int main() {
  std::cout << "Union Print" << std::endl;
  union_print_root( n , &g.root );
 
+ std::cout << "TREE MAP" << std::endl;
+ std::map< std::string , Node > tree_map = make_tree_map( &g.root );
+ for( auto i : tree_map ){
+  std::cout << i.first << std::endl;
+ }
+
  int u = 0 , v = 5;
  E[u][v] = E[v][u] = true;
  graph g2( E );
@@ -49,6 +55,13 @@ int main() {
  g2.root.print(1);
  std::cout << "Union Print" << std::endl;
  union_print_root( n , &g2.root );
+ 
+ std::cout << "TREE MAP" << std::endl;
+ std::map< std::string , Node > tree_map2 = make_tree_map( &g2.root );
+ for( auto i : tree_map2 ){
+  std::cout << i.first << std::endl;
+ }
+
 
 
 
