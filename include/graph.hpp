@@ -58,6 +58,8 @@ class graph {
   
   void Canon5( permutation &beta, std::vector< std::set< permutation > > &G, std::map< int , std::set<int> > &P, std::vector<int> &mu , bool &BestExist , Node* node , std::map<int, std::set<int> > &PreQ );
   std::string Cert5();
+  void Canon6( permutation &beta, std::vector< std::set< permutation > > &G, std::map< int , std::set<int> > &P, std::vector<int> &mu , bool &BestExist , Node* node , std::map<int, std::set<int> > &PreQ , std::map< std::string , Node > &tree_map );
+  std::string Cert6(std::map< std::string , Node > &tree_map );
 
 
   void print();

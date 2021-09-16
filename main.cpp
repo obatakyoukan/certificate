@@ -3,6 +3,7 @@
 #include "cert1.hpp"
 #include "cert2.hpp"
 #include "cert5.hpp"
+#include "cert6.hpp"
 #include <time.h>
 #include <string>
 
